@@ -5,6 +5,21 @@ name: CodeQL
 # Controls when the workflow will run
 on:
   workflow_dispatch:
+    inputs:
+      repo_to_scan: 
+        description: 'Repo to scan'
+        required: true
+        default: ''
+      language: 
+        type: choice
+        description: 'Set code language to scan'
+        required: true
+        default: ''
+        options: 
+        - javascript
+        - java
+        - python
+        - ruby
 
 
 jobs:
@@ -15,10 +30,10 @@ jobs:
       security-events: write
       actions: read
 
-    strategy:
-      fail-fast: false
-      matrix:
-        language: ['javascript']
+#     strategy:
+#       fail-fast: false
+#       matrix:
+#         language: ['javascript']
 
     container:
       image: mcr.microsoft.com/cstsectools/codeql-container:latest
@@ -27,11 +42,13 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          repository: ${{ github.event.inputs.repo_to_scan }}
 
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v1
         with:
-          languages: ${{ matrix.language }}
+          languages: ${{ github.event.inputs.language }}
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v1
