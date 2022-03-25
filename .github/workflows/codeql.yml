@@ -17,4 +17,4 @@ jobs:
       
       # Runs a single command using the runners shell
       - name: Run CodeQL
-        run: docker run --name codeql-container mcr.microsoft.com/codeql/codeql-container -v .:/opt/src -v .:/opt/results -e CODEQL_CLI_ARGS="/scripts/unix/analyze_security.sh /tmp/django/src /tmp/django/output python"
+        run: docker run mcr.microsoft.com/cstsectools/codeql-container:latest
