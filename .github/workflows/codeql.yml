@@ -8,13 +8,32 @@ on:
 
 
 jobs:
-  scan:
-    # The type of runner that the job will run on
+  analyze:
+    name: Analyze
     runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      actions: read
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    strategy:
+      fail-fast: false
+      matrix:
+        language: ['javascript']
+
+    container:
+      image: mcr.microsoft.com/cstsectools/codeql-container:latest
+      # mcr.microsoft.com/cstsectools/codeql-container
+
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v1
+        with:
+          languages: ${{ matrix.language }}
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v1
       
-      # Runs a single command using the runners shell
-      - name: Run CodeQL
-        run: docker run mcr.microsoft.com/cstsectools/codeql-container:latest
+      
