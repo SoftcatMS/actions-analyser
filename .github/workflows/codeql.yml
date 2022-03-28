@@ -56,3 +56,10 @@ jobs:
         uses: github/codeql-action/analyze@v1
         continue-on-error: true
       
+      - name: Upload Report 
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ github.event.inputs.language }}-report
+          path: ${{ github.event.inputs.language }}.sarif
+
+
