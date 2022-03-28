@@ -56,6 +56,11 @@ jobs:
         uses: github/codeql-action/analyze@v1
         continue-on-error: true
       
+      - name: bash
+        run: |
+          ls
+          cd results
+          
       - name: Upload Report 
         uses: actions/upload-artifact@v3
         with:
