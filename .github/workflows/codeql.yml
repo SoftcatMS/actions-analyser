@@ -60,6 +60,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ${{ github.event.inputs.language }}-report
-          path: ${{ github.event.inputs.language }}.sarif
-
+          path: /results/${{ github.event.inputs.language }}.sarif
 
