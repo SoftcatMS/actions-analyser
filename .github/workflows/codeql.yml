@@ -35,9 +35,9 @@ jobs:
 #       matrix:
 #         language: ['javascript']
 
-    container:
-      image: mcr.microsoft.com/cstsectools/codeql-container:latest
-      # mcr.microsoft.com/cstsectools/codeql-container
+#     container:
+#       image: mcr.microsoft.com/cstsectools/codeql-container:latest
+#       # mcr.microsoft.com/cstsectools/codeql-container
 
     steps:
       - name: Checkout repository
